@@ -79,7 +79,7 @@ class ValidateProductRequest extends FormRequest
     {
         $suppliers = new Collection($this->get('suppliers'));
 
-        if ($suppliers->isNotEmpty() && ! $suppliers->pluck('id')->contains($this->get('defaultSupplierId'))) {
+        if ($this->filled('defaultSupplierId') && ! $suppliers->pluck('id')->contains($this->get('defaultSupplierId'))) {
             $this->validator->errors()->add('defaultSupplierId', __(
                 'This supplier must be within selected suppliers'
             ));
@@ -90,12 +90,6 @@ class ValidateProductRequest extends FormRequest
                 'Part number and acquisition price are mandatory for each supplier'
             ));
         }
-
-        if ($this->filled('defaultSupplierId') && $this->invalidDefaultSupplier($suppliers)) {
-            $this->validator->errors()->add('defaultSupplierId', __(
-                'The default supplier does not have the minimum acquisition price'
-            ));
-        }
     }
 
     protected function product()
@@ -103,6 +97,16 @@ class ValidateProductRequest extends FormRequest
         return Product::where('part_number', $this->get('part_number'))
             ->where('manufacturer_id', $this->get('manufacturer_id'))
             ->where('id', '<>', optional($this->route('product'))->id);
+    }
+
+    protected function ensureNotParent()
+    {
+        if (Category::find($this->get('category_id'))->isParent()) {
+            $this->validator->errors()->add(
+                'category_id',
+                __('Must choose a subcategory')
+            );
+        }
     }
 
     private function invalidSuppliers($suppliers)
@@ -117,30 +121,9 @@ class ValidateProductRequest extends FormRequest
             || ! $supplier['pivot']['part_number'];
     }
 
-    private function invalidDefaultSupplier(Collection $suppliers)
-    {
-        $defaultSupplier = $suppliers
-            ->first(fn ($supplier) => $supplier['id'] === $this->get('defaultSupplierId'));
-
-        return $suppliers
-            ->reject(fn ($supplier) => $supplier['id'] === $defaultSupplier['id'])
-            ->contains(fn ($supplier) => $supplier['pivot']['acquisition_price']
-                < $defaultSupplier['pivot']['acquisition_price']);
-    }
-
     private function internalCodeUnique()
     {
         return Rule::unique('products', 'internal_code')
             ->ignore(optional($this->route('product'))->id);
-    }
-
-    private function ensureNotParent()
-    {
-        if (Category::find($this->get('category_id'))->isParent()) {
-            $this->validator->errors()->add(
-                'category_id',
-                __('Must choose a subcategory')
-            );
-        }
     }
 }
