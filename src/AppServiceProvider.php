@@ -12,7 +12,7 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->load()
             ->publish()
-            ->mapMorphings();
+            ->mapMorphs();
     }
 
     private function load()
@@ -36,7 +36,7 @@ class AppServiceProvider extends ServiceProvider
         return $this;
     }
 
-    private function mapMorphings()
+    private function mapMorphs()
     {
         Product::morphMap();
         Picture::morphMap();

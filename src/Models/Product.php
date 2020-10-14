@@ -22,7 +22,11 @@ use LaravelEnso\Tables\Traits\TableCache;
 
 class Product extends Model implements Activatable
 {
+<<<<<<< HEAD:src/Models/Product.php
     use Abilities,
+=======
+    use CascadesMorphMap,
+>>>>>>> origin/feature/morphKeyUpgrade:src/App/Models/Product.php
         ActiveState,
         AvoidsDeletionConflicts,
         CascadesMorphMap,

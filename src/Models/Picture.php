@@ -4,11 +4,19 @@ namespace LaravelEnso\Products\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Config;
+<<<<<<< HEAD:src/Models/Picture.php
 use LaravelEnso\Core\Models\User;
 use LaravelEnso\Files\Contracts\Attachable;
 use LaravelEnso\Files\Contracts\AuthorizesFileAccess;
 use LaravelEnso\Files\Traits\HasFile;
 use LaravelEnso\Helpers\Traits\CascadesMorphMap;
+=======
+use LaravelEnso\Core\App\Models\User;
+use LaravelEnso\Files\App\Contracts\Attachable;
+use LaravelEnso\Files\App\Contracts\AuthorizesFileAccess;
+use LaravelEnso\Files\App\Traits\HasFile;
+use LaravelEnso\Helpers\App\Traits\CascadesMorphMap;
+>>>>>>> origin/feature/morphKeyUpgrade:src/App/Models/Picture.php
 
 class Picture extends Model implements Attachable, AuthorizesFileAccess
 {
