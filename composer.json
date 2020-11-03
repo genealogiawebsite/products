@@ -26,6 +26,7 @@
     ],
     "require": {
         "php": ">=7.4.0",
+<<<<<<< HEAD
         "genealogiawebsite/categories": "^2.0",
         "genealogiawebsite/comments": "^4.0",
         "genealogiawebsite/core": "^6.0",
@@ -38,6 +39,21 @@
         "genealogiawebsite/migrator": "^2.0",
         "genealogiawebsite/packaging-units": "^1.0",
         "genealogiawebsite/tables": "^4.0"
+=======
+        "genealogiawebsite/categories": "^2.0",
+        "genealogiawebsite/comments": "^4.0",
+        "genealogiawebsite/core": "^6.0",
+        "genealogiawebsite/data-import": "^5.0",
+        "genealogiawebsite/documents": "^4.0",
+        "genealogiawebsite/dynamic-methods": "^2.0",
+        "genealogiawebsite/enums": "^2.0",
+        "genealogiawebsite/forms": "^4.0",
+        "genealogiawebsite/helpers": "^2.0",
+        "genealogiawebsite/measurement-units": "^2.0",
+        "genealogiawebsite/migrator": "^2.0",
+        "genealogiawebsite/packaging-units": "^1.0",
+        "genealogiawebsite/tables": "^4.0"
+>>>>>>> upstream/master
     },
     "autoload": {
         "psr-4": {
